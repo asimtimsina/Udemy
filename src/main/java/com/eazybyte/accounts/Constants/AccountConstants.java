@@ -11,6 +11,8 @@ public class AccountConstants {
     public static final String ADDRESS ="3207 W WallNut Hill Ln, Irving, Texas";
     public static final String STATUS_201 ="201";
     public static final String MESSAGE_201 ="Account Created Successfully";
+    public static final String STATUS_202 ="202";
+    public static final String MESSAGE_202 ="Account Deleted Successfully";
     public static final String STATUS_200 ="200";
     public static final String MESSAGE_200 ="Request Processed Successfully";
     public static final String STATUS_500 ="500";

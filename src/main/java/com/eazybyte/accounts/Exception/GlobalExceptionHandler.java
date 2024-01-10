@@ -33,4 +33,15 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(errorResponseDto,HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(InvalidDetailsException.class)
+    public ResponseEntity<ErrorResponseDto> handleInvalidDetails(InvalidDetailsException exception, WebRequest webRequest){
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto(
+                webRequest.getDescription(false),
+                HttpStatus.BAD_REQUEST,
+                exception.getMessage(),
+                LocalDateTime.now());
+
+        return new ResponseEntity<>(errorResponseDto,HttpStatus.NOT_FOUND);
+    }
 }

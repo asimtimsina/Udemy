@@ -11,5 +11,7 @@ public interface AccountsService {
     AllDetailsDTO fetchByMobileNumber(String mobileNumber);
 
 
-//    boolean updateAccount(FetchAllDTO fetchAllDTO);
+    boolean updateAccount(AllDetailsDTO allDetailsDTO);
+
+    boolean DeleteByAccountNumber(Long accountNumber, String mobileNumber);
 }

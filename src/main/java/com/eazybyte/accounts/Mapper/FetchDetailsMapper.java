@@ -7,15 +7,6 @@ import com.eazybyte.accounts.Entity.Customer;
 
 public class FetchDetailsMapper {
 
-   public AllDetails mapToAllDetails(AllDetails allDetails, AllDetailsDTO allDetailsDTO){
-       allDetails.setName(allDetailsDTO.getName());
-       allDetails.setEmail(allDetailsDTO.getEmail());
-       allDetails.setMobileNumber(allDetailsDTO.getMobileNumber());
-       allDetails.setAccountNumber(allDetailsDTO.getAccountNumber());
-       allDetails.setAccountType(allDetailsDTO.getAccountType());
-       allDetails.setBranchAddress(allDetailsDTO.getBranchAddress());
-       return allDetails;
-    }
 
     public static AllDetailsDTO mapToAllDetailsDTO(Customer customer, Accounts accounts, AllDetailsDTO allDetailsDTO){
        allDetailsDTO.setAccountNumber(accounts.getAccountNumber());

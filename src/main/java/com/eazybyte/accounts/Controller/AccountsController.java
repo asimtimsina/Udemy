@@ -35,8 +35,23 @@ public ResponseEntity<ResponseDTO> createAccount(@RequestBody CustomerDTO custom
                     .body(fetchAllDTO);
     }
 
-//    @PutMapping("/update")
-//    public ResponseEntity<ResponseDTO> updateDetails(){
-//
-//    }
+    @PutMapping("/update")
+    public ResponseEntity<ResponseDTO> updateDetails(@RequestBody AllDetailsDTO allDetailsDTO){
+              boolean isUpdated =  accountsService.updateAccount(allDetailsDTO);
+
+              if(isUpdated) return  ResponseEntity.status(HttpStatus.OK)
+                      .body(new ResponseDTO(AccountConstants.STATUS_200,AccountConstants.MESSAGE_200));
+
+              return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                      .body(new ResponseDTO(AccountConstants.STATUS_500,AccountConstants.MESSAGE_500));
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<ResponseDTO> deleteByAccountNumber(@RequestParam Long accountNumber, @RequestParam String mobileNumber){
+       boolean bol=  accountsService.DeleteByAccountNumber(accountNumber,mobileNumber);
+        if(bol) return ResponseEntity.status(HttpStatus.OK)
+                .body(new ResponseDTO(AccountConstants.STATUS_202,AccountConstants.MESSAGE_202));
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ResponseDTO(AccountConstants.STATUS_500,AccountConstants.MESSAGE_500));
+    }
 }
