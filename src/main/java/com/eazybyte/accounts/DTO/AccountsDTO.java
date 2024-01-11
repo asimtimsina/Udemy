@@ -11,8 +11,12 @@ public class AccountsDTO extends BaseEntity {
     @NotEmpty
     @Pattern(regexp="[0-9]{10}", message = "Account Number must be 10 Digits")
     private Long accountNumber;
+
+
     @NotEmpty
     private String accountType;
+
+
     @NotEmpty
     private String branchAddress;
 }
