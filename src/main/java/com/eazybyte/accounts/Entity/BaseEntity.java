@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Getter@Setter
 @ToString@NoArgsConstructor@AllArgsConstructor
 @EntityListeners(AuditAwareImpl.class)
-public class BaseEntity {
+public class  BaseEntity {
     @Hidden
     @CreatedDate
     @Column(updatable = false)    // This will not update the data while preforming CRUD's Update operation.

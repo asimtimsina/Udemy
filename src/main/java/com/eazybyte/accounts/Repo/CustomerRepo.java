@@ -11,4 +11,5 @@ public interface CustomerRepo extends JpaRepository<Customer,Long> {
 
 
     Optional<Customer> findBymobileNumber(String mobileNumber);
+    Optional<Customer> findByCustomerId(Long customerId);
 }

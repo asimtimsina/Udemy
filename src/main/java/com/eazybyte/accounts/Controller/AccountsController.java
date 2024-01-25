@@ -1,6 +1,7 @@
 package com.eazybyte.accounts.Controller;
 
 import com.eazybyte.accounts.Constants.AccountConstants;
+import com.eazybyte.accounts.DTO.AccountContactDTO;
 import com.eazybyte.accounts.DTO.CustomerDTO;
 import com.eazybyte.accounts.DTO.AllDetailsDTO;
 import com.eazybyte.accounts.DTO.ResponseDTO;
@@ -14,12 +15,15 @@ import io.swagger.v3.oas.annotations.servers.Server;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @OpenAPIDefinition(
         info = @Info(
@@ -28,14 +32,12 @@ import org.springframework.web.bind.annotation.*;
                 summary = "This is created by Nischal Timsina",
                 contact = @Contact(name="Nischal Timsina", email = "Nischal@gmail.com", url="nischal.com"),
                 version = "1.2"
-
         ),
         servers = {
                 @Server(description="main", url = "http://localhost:8000/api/"),
                 @Server(description="feature", url = "http://localhost:9000/api/"),
 
         }
-
 )
 @RestController
 @RequestMapping(value = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -79,6 +81,8 @@ public ResponseEntity<ResponseDTO> createAccount(@Valid @RequestBody CustomerDTO
                     .status(HttpStatus.OK)
                     .body(fetchAllDTO);
     }
+
+
 
     @Operation(
            // tags="Update account details using Account Number",
@@ -124,4 +128,27 @@ public ResponseEntity<ResponseDTO> createAccount(@Valid @RequestBody CustomerDTO
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ResponseDTO(AccountConstants.STATUS_500,AccountConstants.MESSAGE_500));
     }
+
+    @Autowired
+    AccountContactDTO accountContactDTO;
+
+    @GetMapping("/contact-info")
+    public ResponseEntity<AccountContactDTO> getContactDetails(){
+        return ResponseEntity.status(HttpStatus.OK).body(accountContactDTO);
+    }
+
+    @Value("${build.version}")
+    private String buildVersion;
+
+    @GetMapping("/build-version")
+    public ResponseEntity<String> getBuildVersion(){
+        return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
+    }
+
+    @GetMapping("/fetchall")
+    public List<AllDetailsDTO> fetchAllAccountDetails() {
+        List<AllDetailsDTO> list = accountsService.FindAll();
+        return list;
+    }
+
 }
