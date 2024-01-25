@@ -18,7 +18,11 @@ spring:
     generate-ddl: true
     show-sql: true
 
-
+management:
+  endpoint:
+    web:
+      exposure:
+        include: "*"
 
 
 
